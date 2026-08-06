@@ -1,0 +1,174 @@
+{
+  "entities": {
+    "Member": {
+      "title": "Member",
+      "description": "Gym member details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "photo": { "type": "string" },
+        "mobile": { "type": "string" },
+        "cnic": { "type": "string" },
+        "gender": { "type": "string" },
+        "address": { "type": "string" },
+        "emergencyContact": { "type": "string" },
+        "joiningDate": { "type": "string" },
+        "membershipPlanId": { "type": "string" },
+        "membershipPlanName": { "type": "string" },
+        "startDate": { "type": "string" },
+        "expiryDate": { "type": "string" },
+        "paidAmount": { "type": "number" },
+        "dueAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "isFrozen": { "type": "boolean" },
+        "freezeReason": { "type": "string" },
+        "isDeleted": { "type": "boolean" },
+        "deletedAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "mobile", "status"]
+    },
+    "MembershipPlan": {
+      "title": "MembershipPlan",
+      "description": "Gym plan details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "durationMonths": { "type": "number" },
+        "price": { "type": "number" },
+        "admissionFee": { "type": "number" },
+        "genderTarget": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["id", "name", "price"]
+    },
+    "PaymentRecord": {
+      "title": "PaymentRecord",
+      "description": "Payment transactions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "memberId": { "type": "string" },
+        "memberName": { "type": "string" },
+        "planName": { "type": "string" },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentDate": { "type": "string" },
+        "receiptNo": { "type": "string" },
+        "remarks": { "type": "string" }
+      },
+      "required": ["id", "memberId", "amount", "paymentDate"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Daily member attendance",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "memberId": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string" },
+        "timeIn": { "type": "string" },
+        "method": { "type": "string" }
+      },
+      "required": ["id", "memberId", "date", "status"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Gym operational expenses",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["id", "title", "amount", "date"]
+    },
+    "Enquiry": {
+      "title": "Enquiry",
+      "description": "Gym prospect enquiries",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "mobile": { "type": "string" },
+        "gender": { "type": "string" },
+        "date": { "type": "string" },
+        "interestedPlan": { "type": "string" },
+        "source": { "type": "string" },
+        "notes": { "type": "string" },
+        "followUpDate": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "name", "mobile", "status"]
+    },
+    "GymSettings": {
+      "title": "GymSettings",
+      "description": "Configuration settings for gym",
+      "type": "object",
+      "properties": {
+        "gymName": { "type": "string" },
+        "gymLogo": { "type": "string" },
+        "adminName": { "type": "string" },
+        "adminEmail": { "type": "string" },
+        "adminMobile": { "type": "string" },
+        "address": { "type": "string" },
+        "currencySymbol": { "type": "string" },
+        "language": { "type": "string" },
+        "themeColor": { "type": "string" }
+      }
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Admin profile details",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "gymName": { "type": "string" },
+        "adminName": { "type": "string" },
+        "mobile": { "type": "string" },
+        "isLoggedIn": { "type": "boolean" }
+      }
+    }
+  },
+  "firestore": {
+    "/members/{memberId}": {
+      "schema": { "$ref": "#/entities/Member" },
+      "description": "Collection of gym members"
+    },
+    "/plans/{planId}": {
+      "schema": { "$ref": "#/entities/MembershipPlan" },
+      "description": "Collection of membership plans"
+    },
+    "/payments/{paymentId}": {
+      "schema": { "$ref": "#/entities/PaymentRecord" },
+      "description": "Collection of payment records"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": { "$ref": "#/entities/AttendanceRecord" },
+      "description": "Collection of attendance logs"
+    },
+    "/expenses/{expenseId}": {
+      "schema": { "$ref": "#/entities/Expense" },
+      "description": "Collection of gym expenses"
+    },
+    "/enquiries/{enquiryId}": {
+      "schema": { "$ref": "#/entities/Enquiry" },
+      "description": "Collection of member enquiries"
+    },
+    "/settings/{settingsId}": {
+      "schema": { "$ref": "#/entities/GymSettings" },
+      "description": "Gym settings configuration"
+    },
+    "/admin/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Admin user profile"
+    }
+  }
+}

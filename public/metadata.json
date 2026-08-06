@@ -1,0 +1,6 @@
+{
+  "name": "SMG Manager",
+  "description": "Complete Gym Management Web App for gym administration, members, attendance, reports, expenses, enquiries, and billing.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
